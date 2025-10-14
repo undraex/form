@@ -23,7 +23,7 @@ export function App() {
       {step === 3 && (
         <Step3 increaseStep={increaseStep} reduceStep={reduceStep} />
       )}
-      <Step4 />
+      {step === 4 && <Step4 />}
     </div>
   );
 }
