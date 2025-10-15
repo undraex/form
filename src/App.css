@@ -10,17 +10,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 32px;
+  /* box-sizing: border-box; */
 }
 .card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   width: 480px;
   height: 655px;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.16);
   background-color: #fff;
   border-radius: 8px;
-  padding: 32px;
 }
 
 .join {
@@ -48,11 +50,13 @@
 }
 
 .input {
-  width: 476px;
+  width: 416px;
   height: 44px;
   border-radius: 8px;
   border: 1px solid #0ca5e9;
-  padding: 12px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
 }
 .star {
   color: red;
@@ -85,7 +89,7 @@
   font-weight: 400;
 }
 .continue {
-  width: 480px;
+  width: 416px;
   height: 44px;
   background-color: #121316;
   color: white;
@@ -94,7 +98,7 @@
   border-radius: 6px;
 }
 .continue2-3 {
-  width: 350px;
+  width: 280px;
   height: 44px;
   background-color: #121316;
   color: white;
@@ -116,11 +120,11 @@
   display: flex;
   gap: 8px;
 }
-.imageBg {
+/* .imageBg {
   height: 180px;
   width: 416px;
   background-color: #7f7f800d;
-}
+} */
 .addImageText {
   font-weight: 500;
   font-size: 14px;
