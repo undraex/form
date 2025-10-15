@@ -22,10 +22,7 @@
   border-radius: 8px;
   padding: 32px;
 }
-.logo {
-  width: 60px;
-  height: 60px;
-}
+
 .join {
   font-style: bold;
   font-size: 26px;
@@ -55,6 +52,7 @@
   height: 44px;
   border-radius: 8px;
   border: 1px solid #0ca5e9;
+  padding: 12px;
 }
 .star {
   color: red;
@@ -80,6 +78,11 @@
   font-size: 14px;
   font-style: bold;
   font-weight: 600;
+}
+.errorText {
+  color: #e14942;
+  font-size: 14px;
+  font-weight: 400;
 }
 .continue {
   width: 480px;
@@ -114,7 +117,8 @@
   gap: 8px;
 }
 .imageBg {
-  height: 250px;
+  height: 180px;
+  width: 416px;
   background-color: #7f7f800d;
 }
 .addImageText {

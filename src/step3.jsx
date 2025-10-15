@@ -1,11 +1,23 @@
-import React from "react";
+// import React from "react";
+import React, { useState } from "react";
+import { PineconeLogoIcon } from "./assets/icons/PineconeLogoIcon";
 
 export function Step3({ increaseStep, reduceStep }) {
+  const [url, setUrl] = useState("");
+
+  const handleInputChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const newUrl = URL.createObjectURL(file);
+      setUrl(newUrl);
+    }
+  };
+
   return (
     <div className="container">
       <div className="card">
         <div>
-          <img src="./logo.svg" className="logo"></img>
+          <PineconeLogoIcon />
           <div className="join inter">Join Us! 😎</div>
           <p className="desc inter">
             Please provide all current information accurately.
@@ -14,17 +26,14 @@ export function Step3({ increaseStep, reduceStep }) {
             <p className="first">Date of birth</p>
             <p className="star">*</p>
           </div>
-          <div>
-            <input type="date" className="input"></input>
-          </div>
+          <input type="date" className="input"></input>
+
           <div className="first-name inter">
             <p className="first">Profile image</p>
             <p className="star">*</p>
           </div>
-
-          <div className="imageBg">
-            <input type="file" />
-          </div>
+          <input className="imageBg" type="file" onChange={handleInputChange} />
+          <img src={url} />
         </div>
 
         <div className="btn-container">

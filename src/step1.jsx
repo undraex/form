@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { PineconeLogoIcon } from "./assets/icons/PineconeLogoIcon";
 
-export function Step1({ increaseStep1 }) {
+export function Step1({ increaseStep }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
@@ -46,7 +46,7 @@ export function Step1({ increaseStep1 }) {
     return errors;
   };
 
-  const increaseStep = () => {
+  const increaseStep1 = () => {
     const errors = handleErrors();
     if (Object.keys(errors).length > 0) {
       return;
@@ -79,43 +79,42 @@ export function Step1({ increaseStep1 }) {
               onChange={handleInputChange}
             />
             {firstNameError && (
-              <div className="text-red-600">{firstNameError}</div>
+              <div className="errorText inter">{firstNameError}</div>
             )}
 
             <div className="last-name inter">
               <p className="last">Last name</p>
               <p className="star">*</p>
             </div>
-            <div>
-              <input
-                type="text"
-                value={lastName}
-                name="lastName"
-                className="input"
-                placeholder="Last name"
-                onChange={handleInputChange}
-              />
-              {lastNameError && (
-                <div className="text-red-600">{lastNameError}</div>
-              )}
-            </div>
+
+            <input
+              type="text"
+              value={lastName}
+              name="lastName"
+              className="input"
+              placeholder="Last name"
+              onChange={handleInputChange}
+            />
+            {lastNameError && (
+              <div className="errorText inter">{lastNameError}</div>
+            )}
+
             <div className="username inter">
               <p className="user">Username</p>
               <p className="star">*</p>
             </div>
-            <div>
-              <input
-                type="text"
-                value={userName}
-                name="userName"
-                className="input"
-                placeholder="Username"
-                onChange={handleInputChange}
-              />
-              {userNameError && (
-                <div className="text-red-600">{userNameError}</div>
-              )}
-            </div>
+
+            <input
+              type="text"
+              value={userName}
+              name="userName"
+              className="input"
+              placeholder="Username"
+              onChange={handleInputChange}
+            />
+            {userNameError && (
+              <div className="errorText inter">{userNameError}</div>
+            )}
           </div>
 
           <div className="btn-container">
