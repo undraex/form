@@ -42,8 +42,13 @@ export function Step2({ increaseStep, reduceStep }) {
       errors.phoneNumber = "Please enter a valid phone number.";
     }
 
-    if (password.length < 8) {
-      errors.password = "Password must include letters and numbers.";
+    // if (password.length >= 8) {
+    //   errors.password = "Password must be at least 8 characters";
+    // }
+    if (password.length >= 8) {
+      // Proceed with next checks or submit
+    } else {
+      errors.password = "Password must be at least 8 characters";
     }
 
     if (confirmPassword !== password || confirmPassword.length === 0) {
@@ -78,7 +83,7 @@ export function Step2({ increaseStep, reduceStep }) {
               Please provide all current information accurately.
             </p>
             <div className="first-name inter">
-              <p className="first">Email</p>
+              <p className="name">Email</p>
               <p className="star">*</p>
             </div>
 
@@ -93,7 +98,7 @@ export function Step2({ increaseStep, reduceStep }) {
             {emailError && <div className="errorText inter">{emailError}</div>}
 
             <div className="last-name inter">
-              <p className="last">Phone number</p>
+              <p className="name">Phone number</p>
               <p className="star">*</p>
             </div>
 
@@ -110,7 +115,7 @@ export function Step2({ increaseStep, reduceStep }) {
             )}
 
             <div className="username inter">
-              <p className="user">Password</p>
+              <p className="name">Password</p>
               <p className="star">*</p>
             </div>
 
@@ -127,7 +132,7 @@ export function Step2({ increaseStep, reduceStep }) {
             )}
 
             <div className="first-name inter">
-              <p className="first">Confirm password</p>
+              <p className="name">Confirm password</p>
               <p className="star">*</p>
             </div>
 
@@ -144,7 +149,7 @@ export function Step2({ increaseStep, reduceStep }) {
             )}
           </div>
 
-          <div className="btn-container">
+          <div className="buttonContainer">
             <button className="back inter" onClick={reduceStep}>
               Back
             </button>

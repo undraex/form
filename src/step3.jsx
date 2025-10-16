@@ -1,11 +1,12 @@
 // import React from "react";
 import React, { useState } from "react";
 import { PineconeLogoIcon } from "./assets/icons/PineconeLogoIcon";
+import { ImgIcon } from "./assets/icons/ImgIcon";
 
 export function Step3({ increaseStep, reduceStep }) {
   const [url, setUrl] = useState("");
 
-  const handleInputChange = (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const newUrl = URL.createObjectURL(file);
@@ -23,20 +24,55 @@ export function Step3({ increaseStep, reduceStep }) {
             Please provide all current information accurately.
           </p>
           <div className="first-name inter">
-            <p className="first">Date of birth</p>
+            <p className="name">Date of birth</p>
             <p className="star">*</p>
           </div>
-          <input type="date" className="input"></input>
+          <input type="date" className=" input" />
 
           <div className="first-name inter">
-            <p className="first">Profile image</p>
+            <p className="name">Profile image</p>
             <p className="star">*</p>
           </div>
-          <input className="imageBg" type="file" onChange={handleInputChange} />
-          <img src={url} />
+          {/* 
+          <div>
+            <input
+              id={!url && "imageBg"}
+              type="file"
+              onChange={handleImageChange}
+            />
+
+            <ImgIcon />
+            <img src={url} />
+          </div> */}
+          {!url && (
+            <>
+              <label htmlFor="fileUpload" className="customUploadButton">
+                <ImgIcon />
+                Add image
+              </label>
+
+              <input
+                id="fileUpload"
+                className="hiddenFileInput"
+                type="file"
+                name="profileImage"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </>
+          )}
+          {url && (
+            <div>
+              <img
+                src={url}
+                alt="Uploaded Preview"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            </div>
+          )}
         </div>
 
-        <div className="btn-container">
+        <div className="buttonContainer">
           <button className="back  inter" onClick={reduceStep}>
             Back
           </button>

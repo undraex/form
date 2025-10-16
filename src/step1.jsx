@@ -61,12 +61,12 @@ export function Step1({ increaseStep }) {
         <div className="card">
           <div>
             <PineconeLogoIcon />
-            <div className="join inter">Join Us! 😎</div>
+            <div className="join shadow inter">Join Us! 😎</div>
             <p className="desc inter">
               Please provide all current information accurately.
             </p>
             <div className="first-name inter">
-              <p className="first">First name</p>
+              <p className="name">First name</p>
               <p className="star">*</p>
             </div>
 
@@ -83,7 +83,7 @@ export function Step1({ increaseStep }) {
             )}
 
             <div className="last-name inter">
-              <p className="last">Last name</p>
+              <p className="name">Last name</p>
               <p className="star">*</p>
             </div>
 
@@ -100,7 +100,7 @@ export function Step1({ increaseStep }) {
             )}
 
             <div className="username inter">
-              <p className="user">Username</p>
+              <p className="name">Username</p>
               <p className="star">*</p>
             </div>
 
