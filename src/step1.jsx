@@ -1,47 +1,233 @@
+// import React, { useState } from "react";
+// import { PineconeLogoIcon } from "./assets/icons/PineconeLogoIcon";
+
+// export function Step1({ increaseStep }) {
+//   const [firstName, setFirstName] = useState("");
+//   const [lastName, setLastName] = useState("");
+//   const [userName, setUserName] = useState("");
+//   const [firstNameError, setFirstNameError] = useState("");
+//   const [lastNameError, setLastNameError] = useState("");
+//   const [userNameError, setUserNameError] = useState("");
+
+//   const nameRegex = /^[a-zA-Z]+$/;
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+
+//     if (name === "firstName") {
+//       setFirstName(value);
+//       if (nameRegex.test(value) && value.length > 0) {
+//         setFirstNameError("");
+//       }
+//     } else if (name === "lastName") {
+//       setLastName(value);
+//       if (nameRegex.test(value) && value.length > 0) {
+//         setLastNameError("");
+//       }
+//     } else if (name === "userName") {
+//       setUserName(value);
+//       if (nameRegex.test(value) && value.length > 0) {
+//         setUserNameError("");
+//       }
+//     }
+//   };
+
+//   const handleErrors = () => {
+//     const errors = {};
+//     console.log(errors, "first");
+
+//     if (!nameRegex.test(firstName) || firstName.length === 0) {
+//       errors.firstName =
+//         "First name cannot contain special characters or numbers.";
+//     }
+//     if (!nameRegex.test(lastName) || lastName.length === 0) {
+//       errors.lastName =
+//         "Last name cannot contain special characters or numbers.";
+//     }
+//     if (!nameRegex.test(userName) || userName.length === 0) {
+//       errors.userName =
+//         "This username is already taken. Please choose another one.";
+//     }
+//     setFirstNameError(errors.firstName || "");
+//     setLastNameError(errors.lastName || "");
+//     setUserNameError(errors.userName || "");
+
+//     return errors;
+//   };
+
+//   const increaseStep1 = () => {
+//     const errors = handleErrors();
+//     if (Object.keys(errors).length > 0) {
+//       return;
+//     } else {
+//       increaseStep();
+//     }
+//   };
+
+//   return (
+//     <>
+//       <div className="container">
+//         <div className="card">
+//           <div>
+//             <PineconeLogoIcon />
+//             <div className="join shadow inter">Join Us! 😎</div>
+//             <p className="desc inter">
+//               Please provide all current information accurately.
+//             </p>
+//             <div className="first-name inter">
+//               <p className="name">First name</p>
+//               <p className="star">*</p>
+//             </div>
+
+//             <input
+//               type="text"
+//               value={firstName}
+//               name="firstName"
+//               className="input"
+//               placeholder="First name"
+//               onChange={handleInputChange}
+//             />
+//             {firstNameError && (
+//               <div className="errorText inter">{firstNameError}</div>
+//             )}
+
+//             <div className="last-name inter">
+//               <p className="name">Last name</p>
+//               <p className="star">*</p>
+//             </div>
+
+//             <input
+//               type="text"
+//               value={lastName}
+//               name="lastName"
+//               className="input"
+//               placeholder="Last name"
+//               onChange={handleInputChange}
+//             />
+//             {lastNameError && (
+//               <div className="errorText inter">{lastNameError}</div>
+//             )}
+
+//             <div className="username inter">
+//               <p className="name">Username</p>
+//               <p className="star">*</p>
+//             </div>
+
+//             <input
+//               type="text"
+//               value={userName}
+//               name="userName"
+//               className="input"
+//               placeholder="Username"
+//               onChange={handleInputChange}
+//             />
+//             {userNameError && (
+//               <div className="errorText inter">{userNameError}</div>
+//             )}
+//           </div>
+
+//           <div className="btn-container">
+//             <button className="continue inter" onClick={increaseStep1}>
+//               Continue 1/3{" "}
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
 import React, { useState } from "react";
 import { PineconeLogoIcon } from "./assets/icons/PineconeLogoIcon";
 
 export function Step1({ increaseStep }) {
+  const { increaseStep, step } = props;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
+
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [userNameError, setUserNameError] = useState("");
 
+  const [firstNameHasError, setFirstNameHasError] = useState(false);
+  const [lastNameHasError, setLastNameHasError] = useState(false);
+  const [userNameHasError, setUserNameHasError] = useState(false);
+
   const nameRegex = /^[a-zA-Z]+$/;
 
+  const validateField = (name, value) => {
+    if (!nameRegex.test(value) || value.length === 0) {
+      if (name === "firstName") {
+        setFirstNameError(
+          "First name cannot contain special characters or numbers."
+        );
+        setFirstNameHasError(true);
+      }
+      if (name === "lastName") {
+        setLastNameError(
+          "Last name cannot contain special characters or numbers."
+        );
+        setLastNameHasError(true);
+      }
+      if (name === "userName") {
+        setUserNameError(
+          "Username cannot contain special characters or numbers."
+        );
+        setUserNameHasError(true);
+      }
+    } else {
+      if (name === "firstName") {
+        setFirstNameError("");
+        setFirstNameHasError(false);
+      }
+      if (name === "lastName") {
+        setLastNameError("");
+        setLastNameHasError(false);
+      }
+      if (name === "userName") {
+        setUserNameError("");
+        setUserNameHasError(false);
+      }
+    }
+  };
+
   const handleInputChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const { name, value } = e.target;
+
     if (name === "firstName") {
       setFirstName(value);
+      validateField(name, value);
     } else if (name === "lastName") {
       setLastName(value);
-    } else {
+      validateField(name, value);
+    } else if (name === "userName") {
       setUserName(value);
+      validateField(name, value);
     }
   };
 
   const handleErrors = () => {
     const errors = {};
-    console.log(errors, "first");
 
     if (!nameRegex.test(firstName) || firstName.length === 0) {
       errors.firstName =
         "First name cannot contain special characters or numbers.";
+      setFirstNameHasError(true);
+      setFirstNameError(errors.firstName);
     }
     if (!nameRegex.test(lastName) || lastName.length === 0) {
       errors.lastName =
         "Last name cannot contain special characters or numbers.";
+      setLastNameHasError(true);
+      setLastNameError(errors.lastName);
     }
     if (!nameRegex.test(userName) || userName.length === 0) {
       errors.userName =
-        "This username is already taken. Please choose another one.";
+        "Username cannot contain special characters or numbers.";
+      setUserNameHasError(true);
+      setUserNameError(errors.userName);
     }
-    setFirstNameError(errors.firstName || "");
-    setLastNameError(errors.lastName || "");
-    setUserNameError(errors.userName || "");
 
     return errors;
   };
@@ -50,80 +236,88 @@ export function Step1({ increaseStep }) {
     const errors = handleErrors();
     if (Object.keys(errors).length > 0) {
       return;
-    } else {
-      increaseStep();
     }
+
+    increaseStep();
+    localStorage.setItem(
+      "data",
+      JSON.stringify({ firstName, lastName, userName })
+    );
+    localStorage.setItem("currentStep", step + 1);
   };
 
   return (
-    <>
-      <div className="container">
-        <div className="card">
-          <div>
+    <div className="container">
+      <div className="card">
+        <div id="gap1">
+          <div id="gap">
             <PineconeLogoIcon />
             <div className="join shadow inter">Join Us! 😎</div>
             <p className="desc inter">
               Please provide all current information accurately.
             </p>
-            <div className="first-name inter">
-              <p className="name">First name</p>
-              <p className="star">*</p>
-            </div>
-
-            <input
-              type="text"
-              value={firstName}
-              name="firstName"
-              className="input"
-              placeholder="First name"
-              onChange={handleInputChange}
-            />
-            {firstNameError && (
-              <div className="errorText inter">{firstNameError}</div>
-            )}
-
-            <div className="last-name inter">
-              <p className="name">Last name</p>
-              <p className="star">*</p>
-            </div>
-
-            <input
-              type="text"
-              value={lastName}
-              name="lastName"
-              className="input"
-              placeholder="Last name"
-              onChange={handleInputChange}
-            />
-            {lastNameError && (
-              <div className="errorText inter">{lastNameError}</div>
-            )}
-
-            <div className="username inter">
-              <p className="name">Username</p>
-              <p className="star">*</p>
-            </div>
-
-            <input
-              type="text"
-              value={userName}
-              name="userName"
-              className="input"
-              placeholder="Username"
-              onChange={handleInputChange}
-            />
-            {userNameError && (
-              <div className="errorText inter">{userNameError}</div>
-            )}
           </div>
-
-          <div className="btn-container">
-            <button className="continue inter" onClick={increaseStep1}>
-              Continue 1/3{" "}
-            </button>
+          <div id="names">
+            <div id="gap">
+              <div className="first-name inter">
+                <p className="name">First name</p>
+                <p className="star">*</p>
+              </div>
+              <input
+                type="text"
+                value={firstName}
+                name="firstName"
+                className={`input ${firstNameHasError ? "input-error" : ""}`}
+                placeholder="First name"
+                onChange={handleInputChange}
+              />
+              {firstNameError && (
+                <div className="errorText inter">{firstNameError}</div>
+              )}
+            </div>
+            <div id="gap">
+              <div className="last-name inter">
+                <p className="name">Last name</p>
+                <p className="star">*</p>
+              </div>
+              <input
+                type="text"
+                value={lastName}
+                name="lastName"
+                className={`input ${lastNameHasError ? "input-error" : ""}`}
+                placeholder="Last name"
+                onChange={handleInputChange}
+              />
+              {lastNameError && (
+                <div className="errorText inter">{lastNameError}</div>
+              )}
+            </div>
+            <div id="gap">
+              <div className="username inter">
+                <p className="name">Username</p>
+                <p className="star">*</p>
+              </div>
+              <input
+                type="text"
+                value={userName}
+                name="userName"
+                className={`input ${userNameHasError ? "input-error" : ""}`}
+                placeholder="Username"
+                onChange={handleInputChange}
+              />
+              {userNameError && (
+                <div className="errorText inter">{userNameError}</div>
+              )}
+            </div>
           </div>
         </div>
+
+        <div className="buttonContainer">
+          <button className="continue inter" onClick={increaseStep1}>
+            Continue 1/3{" "}
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
