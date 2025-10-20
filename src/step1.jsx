@@ -14,10 +14,7 @@ export function Step1({ increaseStep }) {
   const [firstNameHasError, setFirstNameHasError] = useState(false);
   const [lastNameHasError, setLastNameHasError] = useState(false);
   const [userNameHasError, setUserNameHasError] = useState(false);
-  const getLocalStorageData = () => {
-    localStorage.getItem("data");
-  };
-  console.log(getLocalStorageData());
+
   const nameRegex = /^[a-zA-Z]+$/;
 
   const validateField = (name, value) => {
@@ -111,7 +108,7 @@ export function Step1({ increaseStep }) {
         userName: userName,
       })
     );
-    localStorage.setItem("currentStep", step + 1);
+    // localStorage.setItem("currentStep", step + 1);
   };
 
   return (

@@ -7,15 +7,11 @@ import { Step3 } from "./step3.jsx";
 import { Step4 } from "./step4.jsx";
 
 export function App() {
-  const getCurrentStep = () => {
-    return Number(localStorage.getItem("currentStep"));
-  };
-  const [step, setStep] = useState(getCurrentStep());
+  const [step, setStep] = useState(1);
   function increaseStep() {
     setStep(step + 1);
   }
   function reduceStep() {
-    localStorage.setItem("currenStep", step - 1);
     setStep(step - 1);
   }
   return (
