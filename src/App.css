@@ -56,10 +56,9 @@
 }
 .input {
   width: 414px;
-  height: 44px;
   border-radius: 8px;
   border: 1px solid #cbd5e1;
-  padding: 0px;
+  padding: 12px;
   align-items: center;
 }
 .inputError {
